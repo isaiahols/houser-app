@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { HashRouter } from 'react-router-dom';
+
+import './reset.css';
 import './App.css';
+
+import routes from './route'
+import Header from './components/Header/header';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <HashRouter>
+        <div className="App">
+          <Header />
+          {routes}
+        </div>
+      </HashRouter>
     );
   }
 }
