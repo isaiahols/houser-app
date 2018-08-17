@@ -1,39 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
 
-function Step2() {
+import { updateImg } from '../../../ducks/reducer';
+
+function Step2(props) {
+    const { img, updateImg } = props
+
     return (
         <div>
 
-            <h1>Add New Listing</h1>
-            <Link to='/' >
-                <button>Cancel</button>
+            <div>
+                <h2>Image URL</h2>
+                <input
+                    type="text"
+                    value={img}
+                    onChange={(e) => updateImg(e.target.value)}
+                />
+            </div>
+            <Link to='1'>
+                <button>Back</button>
             </Link>
-            <div>
-                <h2>Property Name</h2>
-                <input type="text" />
-            </div>
-            <div>
-                <h2>Address</h2>
-                <input type="text" />
-            </div>
-            <div>
-                <h2>City</h2>
-                <input type="text" />
-            </div>
-            <div>
-                <h2>State</h2>
-                <input type="text" />
-            </div>
-            <div>
-                <h2>Zip Code</h2>
-                <input type="text" />
-            </div>
-            <Link >
+            <Link to='3' >
                 <button>Next</button>
             </Link>
         </div>
     )
 }
 
-export default Step2;
+function mapStateToProps(state) {
+    const { img } = state;
+    return { img }
+}
+
+export default connect(mapStateToProps,{updateImg})(Step2);

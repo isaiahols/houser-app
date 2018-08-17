@@ -1,39 +1,74 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
 
-function Step1() {
+import { updateTitle, updateAddress, updateCity, updateSt, updateZip } from '../../../ducks/reducer';
+
+function Step1(props) {
+    const { title, address, city, st, zip, updateTitle, updateAddress, updateCity, updateSt, updateZip } = props;
     return (
         <div>
-
-            <h1>Add New Listing</h1>
-            <Link to='/' >
-                <button>Cancel</button>
-            </Link>
             <div>
                 <h2>Property Name</h2>
-                <input type="text" />
+                <input
+                    type="text"
+                    value={title}
+                    onChange={(e) => updateTitle(e.target.value)}
+                />
             </div>
             <div>
                 <h2>Address</h2>
-                <input type="text" />
+                <input
+                    type="text"
+                    value={address}
+                    onChange={(e) => updateAddress(e.target.value)}
+                />
             </div>
             <div>
                 <h2>City</h2>
-                <input type="text" />
+                <input
+                    type="text"
+                    value={city}
+                    onChange={(e) => updateCity(e.target.value)}
+                />
             </div>
             <div>
                 <h2>State</h2>
-                <input type="text" />
+                <input
+                    type="text"
+                    value={st}
+                    onChange={(e) => updateSt(e.target.value)}
+                />
             </div>
             <div>
                 <h2>Zip Code</h2>
-                <input type="text" />
+                <input
+                    type="text"
+                    value={zip}
+                    onChange={(e) => updateZip(e.target.value)}
+                    placeholder='0'
+                />
             </div>
-            <Link >
+            <Link to='2' >
                 <button>Next</button>
             </Link>
         </div>
     )
 }
 
-export default Step1;
+function mapStateToProps(state) {
+    const { title, address, city, st, zip } = state;
+    return {
+        title,
+        address,
+        city,
+        st,
+        zip
+    }
+}
+
+const actionFunctions = {
+    updateTitle, updateAddress, updateCity, updateSt, updateZip
+}
+
+export default connect(mapStateToProps, actionFunctions)(Step1);

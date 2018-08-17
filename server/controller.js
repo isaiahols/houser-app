@@ -6,9 +6,9 @@ module.exports = {
             })
     },
     addHouse: (req, res) => {
-        const { title, address, city, state, zip } = req.body;
+        const { title, address, city, st, zip , img, mortgage, rent} = req.body;
 
-        req.app.get('db').add_house([title, address, city, state, zip])
+        req.app.get('db').add_house([title, address, city, st, zip, img, mortgage, rent])
             .then(response => {
                 res.status(200).send(response);
             })

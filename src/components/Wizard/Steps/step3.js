@@ -1,39 +1,73 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { connect } from 'react-redux';
 
-function Step3() {
+import { updateMortgage, updateRent, addHouse, updateHouseList } from '../../../ducks/reducer';
+
+function Step3(props) {
+    const { title, address, city, st, zip, img, mortgage, rent, updateHouseList, updateMortgage, updateRent, addHouse } = props
+    function run() {
+
+        const newHouse = {
+            title,
+            address,
+            city,
+            st,
+            zip,
+            img,
+            mortgage,
+            rent
+        }
+        axios.post('/api/houses', newHouse)
+        .then(response => {
+                console.log(response.data)
+                updateHouseList(response.data)
+            })
+    }
+
     return (
         <div>
-
-            <h1>Add New Listing</h1>
-            <Link to='/' >
-                <button>Cancel</button>
+            <div>
+                <h2>Monthly Mortgage Amount</h2>
+                <input
+                    type="text"
+                    value={mortgage}
+                    onChange={(e) => props.updateMortgage(e.target.value)}
+                    placeholder='0'
+                />
+            </div>
+            <div>
+                <h2>Desired Monthly Rent</h2>
+                <input
+                    type="text"
+                    value={rent}
+                    onChange={(e) => props.updateRent(e.target.value)}
+                    placeholder='0'
+                />
+            </div>
+            <Link to='2'>
+                <button>Back</button>
             </Link>
-            <div>
-                <h2>Property Name</h2>
-                <input type="text" />
-            </div>
-            <div>
-                <h2>Address</h2>
-                <input type="text" />
-            </div>
-            <div>
-                <h2>City</h2>
-                <input type="text" />
-            </div>
-            <div>
-                <h2>State</h2>
-                <input type="text" />
-            </div>
-            <div>
-                <h2>Zip Code</h2>
-                <input type="text" />
-            </div>
-            <Link >
-                <button>Next</button>
+            <Link to='/' >
+                <button onClick={() => run()} >Add</button>
             </Link>
         </div>
     )
 }
 
-export default Step3;
+function mapStateToProps(state) {
+    const { title, address, city, st, zip, img, mortgage, rent } = state;
+    return {
+        title,
+        address,
+        city,
+        st,
+        zip,
+        img,
+        mortgage,
+        rent
+    }
+}
+
+export default connect(mapStateToProps, { updateMortgage, updateRent, updateHouseList })(Step3);

@@ -37,12 +37,12 @@ class Dashboard extends Component {
             return <House house={house} deleteHouse={this.handleDelete} />
         })
 
-        console.log(this.state.houseLists);
+        // console.log(this.state.houseLists);
 
         return (
             <div className="dashboard" >
                 <h1>Dashboard</h1>
-                <Link to='/wizard/step1'>
+                <Link to='/wizard/1'>
                     <button>Add New Property</button>
                 </Link>
                 <hr />

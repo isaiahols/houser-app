@@ -1,6 +1,6 @@
 .houseCard {
     background: lightsteelblue;
-    height: 120px;
+    min-height: 120px;
     width: 60vw;
     padding: 10px;
     margin-top: 15px;
